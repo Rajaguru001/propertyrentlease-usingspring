@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #333;
+            color: #fff;
+            padding-top: 20px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            overflow-y: auto;
+        }
+
+        .content {
+            margin-left: 200px;
+            padding: 20px;
+            width: calc(100% - 250px);
+            overflow-x: auto;
+        }
+
+        /* Sidebar Styles */
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #555;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        button {
+            padding: 8px 16px;
+            background-color: #4D76FF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2424FF;
+        }
+
+        .property-image {
+            max-width: 100px;
+            max-height: 100px;
+            object-fit: cover;
+            margin-right: 5px;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                margin-bottom: 20px;
+            }
+
+            .content {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Hello Admin</h2>
+          <a th:href="@{/homepage}"><p>Home</p></a>
+        <a th:href="@{/logout}"><p>Logout</p></a>
+        <a th:href="@{/buyerview}">Approved Property</a>
+    </div>
+    <div class="content">
+        <h2>Waiting for your Approval!</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Property ID</th>
+                    <th>Property Type</th>
+                    <th>Sqft</th>
+                    <th>Furnishing</th>
+                    <th>Available From</th>
+                    <th>Rent</th>
+                    <th>Address</th>
+                    <th>Posted On Date</th>
+                    <th>Location</th>
+                    <th>EB Bill</th>
+                    <th>Images</th>
+                    <th>Approval</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="property : ${propertyDetailsList}">
+                    <td th:text="${property.propertyId}"></td>
+                    <td th:text="${property.propertyType}"></td>
+                    <td th:text="${property.sqft}"></td>
+                    <td th:text="${property.furnishing}"></td>
+                    <td th:text="${property.availableFrom}"></td>
+                    <td th:text="${property.rent}"></td>
+                    <td th:text="${property.address}"></td>
+                    <td th:text="${property.postedOnDate}"></td>
+                    <td th:text="${property.location}"></td>
+                    <td>
+                        <img th:src="'data:image/jpeg;base64,' + ${property.ebBillBase64}" width="200" height="100" alt=""/>
+                    </td>
+                    <td>
+               <div th:each="image : ${property.propertyImages}">
+            <img th:src="@{'data:image/jpeg;base64,' + ${image}}"  width="200" height="100" alt="Property Image"/>
+        </div>
+            </td>
+                    <td>
+                        <form action="/admindashboard" method="post">
+                            <input type="hidden" name="propertyId" th:value="${property.propertyId}">
+                            <button type="submit">Approval</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

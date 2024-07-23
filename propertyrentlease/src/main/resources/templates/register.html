@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EliteRentals - Registration</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+.navbar {
+    background-color: #FF204E;
+    overflow: hidden;
+    padding: 14px 20px;
+}
+
+ .navbar .logo img {
+            max-height: 100px;
+            max-width:200px;
+        }
+
+
+.navbar .company-name {
+    font-size: 24px;
+    font-style: italic;
+    font-weight: bold;
+    color: white;
+}
+
+.main-container {
+    display: flex;
+    height: calc(100vh - 50px);
+}
+
+.left-panel {
+    background: url('images/your_background_image.jpg') no-repeat center center;
+    background-size: cover;
+    flex: 1;
+    color: white;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.left-panel h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: black;
+}
+
+.left-panel ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.left-panel ul li {
+    margin-bottom: 10px;
+    font-size: 18px;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 8px;
+    color: black;
+}
+
+.left-panel ul li:before {
+    content: "✔";
+    color: #FF204E;
+    margin-right: 10px;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 100px);
+    background-color: #f5f5f5;
+    margin-right: 5%;
+    padding: 0 20px;
+}
+
+.container {
+    margin: 0 auto 20px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+input[type="text"], input[type="password"], input[type="email"], input[type="tel"], input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    background-color: #FF204E;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #29252C;
+}
+
+.signup-link {
+    margin-top: 20px;
+    display: block;
+    text-align: center;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    width: 100%;
+}
+
+footer .footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 0 20px;
+}
+
+footer .footer-col {
+    flex: 1;
+    margin: 0 10px;
+}
+
+footer .footer-col h4 {
+    margin-bottom: 10px;
+}
+
+footer .footer-col ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+footer .footer-col ul li {
+    margin-bottom: 5px;
+}
+
+footer .social-links img {
+    margin-right: 10px;
+}
+
+footer .social-links a {
+    color: white;
+}
+    
+        /* Additional or modified styles for the registration page */
+        .container {
+            margin: 0 auto 20px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        input[type="text"], input[type="password"], input[type="email"], input[type="tel"], input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #FF204E;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #29252C;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+            text-align: left;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="logo">
+        <img src="images/EliteRentalslogo-removebg-preview.png" alt="EliteRentals Logo">
+        <span class="company-name"></span>
+    </div>
+</div>
+
+<div class="main-container">
+    <div class="left-panel">
+        <h2>Things you Can Do with EliteRentals Account</h2>
+        <ul>
+            <li>Post your Property </li>
+            <li>Set property alerts for your requirement</li>
+            <li>Get accessed by over 1 Lakh buyers</li>
+            <li>Showcase your property as Rental, PG or for Sale</li>
+            <li>Get instant queries over Phone, Email and SMS</li>
+            <li>Performance in search & Track responses & views online</li>
+            <li>Add detailed property information & multiple photos per listing</li>
+        </ul>
+    </div>
+    <div class="login-container">
+        <div class="container">
+            <h1>Register</h1>
+            <form action="/registeruser" method="post">
+                <input type="text" name="name" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password"
+                       pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#&$]).{5,}" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="tel" name="phonenumber" placeholder="Phone Number"
+                       pattern="[6,7,8,9]{1}[0-9]{9}" required>
+                <input type="submit" value="Sign Up">
+            </form>
+            <div class="signup-link">
+                Already have an account? <a href="/login">Login</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-col">
+            <h4>Company</h4>
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Our Services</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Our Facility</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Follow Us</h4>
+            <div class="social-links">
+                <a href="#"><img src="images/insta.jpg" alt="Instagram" height="15px" width="15px"></a>
+                <a href="#"><img src="images/facebook.jpg" alt="Facebook" height="15px" width="15px"></a>
+                <a href="#"><img src="images/twitter.png" alt="Twitter" height="15px" width="15px"></a>
+            </div>
+        </div>
+    </div>
+    <p>&copy; 2024 EliteRentals. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

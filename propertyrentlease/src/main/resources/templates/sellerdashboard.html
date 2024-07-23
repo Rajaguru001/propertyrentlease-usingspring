@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Seller Dashboard</title>
+<style>
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f2f2f2;
+	margin: 0;
+	padding: 0;
+}
+
+header {
+	background-color: #FF204E;
+	color: #fff;
+	padding: 10px;
+	text-align: center;
+}
+
+nav {
+	background-color: #FF204E;
+	padding: 10px;
+	text-align: center;
+	height: 150px;
+}
+
+nav a {
+	color: #fff;
+	text-decoration: none;
+	margin-bottom: 10px;
+}
+
+nav a:hover {
+	background-color: #555;
+}
+
+nav img {
+	max-height: 120px;
+	margin-right: 1000px;
+	width: 250px;
+}
+
+nav a {
+	color: #fff;
+	text-decoration: none;
+	margin: 0 10px;
+	transition: all 0.3s ease-in-out;
+}
+
+nav a:hover {
+	text-decoration: underline;
+	transform: scale(1.1);
+}
+
+.container {
+	width: 80%;
+	margin: auto;
+	padding: 20px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.content {
+	padding: 20px;
+}
+
+.owner, .buyer {
+	display: flex;
+	flex-direction: column;
+}
+
+footer {
+	background-color: #333;
+	color: #fff;
+	text-align: center;
+	padding: 10px;
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+}
+
+button.approve-button {
+	background-color: #FF204E;
+	color: white;
+	border: none;
+	padding: 8px 16px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+button.approved {
+	background-color: #4CAF50;
+	color: white;
+	border: none;
+	padding: 8px 16px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 14px;
+	cursor: default;
+}
+
+.owner {
+	flex: 1;
+	padding: 10px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+	width: 50%;
+}
+
+.buyer {
+	flex: 1;
+	padding: 10px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+	width: 100%;
+}
+
+.profile-img {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	margin-right: 10px;
+	object-fit: cover;
+}
+</style>
+</head>
+<body>
+
+	<nav>
+		<div>
+			<img src="images/logo5.png" alt="EliteRentals Logo">
+		</div>
+
+		<div th:if="${#strings.isEmpty(session.user)}" class="login-signup">
+			<a th:href="@{/login}">Login/Signup</a>
+		</div>
+		<a href="contentPage" onclick="location.href='/homepage'">Home</a> <a
+			href="#">Logout</a> <a th:href="@{/sellerpostproperty}">Post
+			Property</a>
+	</nav>
+
+	<h2>
+		Welcome back, <span th:text="${session.user.username}"></span>!
+	</h2>
+	<p>This is your Seller Dashboard.</p>
+
+	<div class="container">
+		<div class="content">
+			<div th:each="request : ${sellerdashboard}">
+				<div class="buyer">
+					<img src="images/man.png" alt="Buyer Profile" class="profile-img">
+					<p>
+						Buyer Name: <span th:text="${request.renter_name}"></span>
+					</p>
+					<p>
+						Buyer Email: <span th:text="${request.renter_email}"></span>
+					</p>
+					<p>
+						Buyer Phone Number: <span th:text="${request.renter_phonenumber}"></span>
+					</p>
+					<form action="/sellermail" method="post">
+						<input type="hidden" name="propertyId"
+							th:value="${request.property_id}"> <input type="hidden"
+							name="rentid" th:value="${request.renter_id}">
+						<button type="submit" class="approve-button">Approval</button>
+					</form>
+				</div>
+				<hr>
+			</div>
+			<div th:if="${sellerdashboard.empty}">
+				<p>No data available</p>
+			</div>
+		</div>
+	</div>
+
+	<footer>&copy; 2024 PropertyRent. All rights reserved.</footer>
+
+</body>
+</html>
